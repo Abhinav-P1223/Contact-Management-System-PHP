@@ -1,0 +1,12 @@
+<?php
+session_start();
+require 'config.php';
+if (!isset($_SESSION['admin'])) {
+    header("Location: admin_login.php");
+    exit();
+}
+$conn = getDBConnection();
+$conn->query("DELETE FROM contacts");
+$conn->close();
+header("Location: admin.php?msg=deleted_all");
+exit();
